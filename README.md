@@ -6,7 +6,8 @@ The United States Geological Survey, or USGS for short, is responsible for provi
 The USGS also provides earthquake data in a number of different formats, updated every five minutes.
 
 I have chosen to visualise the dataset with the earthquakes of the last 7 days, in GeoJSON format.
-[USGS GeoJSON Documentation.](http://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php).
+
+[USGS GeoJSON Documentation](http://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php).
 
 ![GeoJson Example](static/img/geojson.JPG)
 
@@ -24,3 +25,6 @@ I have imported and visualised the data:
 
 ![My Map](static/img/map1.JPG)
 ![My Map](static/img/map2.JPG)
+
+---
+© 2022 University of Birmingham / Data Analysis Assignment by DianaAF

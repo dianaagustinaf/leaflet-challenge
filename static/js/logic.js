@@ -15,12 +15,16 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap);
 
+L.tileLayer(
+    "https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg"
+).addTo(myMap);
+
 // Color
 function chooseColor(depth) {                   
     if (depth < 5) {
-        return "green";
-    } else if (depth < 20) {
         return "darkgreen";
+    } else if (depth < 20) {
+        return "green";
     } else if (depth < 50) {
         return "yellow";    
     } else if (depth < 100) {
@@ -84,5 +88,23 @@ L.geoJSON(data, {
         )
     }
 }).addTo(myMap);
+
+
+
+var legend = L.control({ position: "bottomleft" });
+
+legend.onAdd = function(myMap) {
+  var div = L.DomUtil.create("div", "legend");
+  div.innerHTML += "<h4>Depth</h4>";
+  div.innerHTML += '<i style="background: darkgreen"></i><span> -10 to 5 </span><br>';
+  div.innerHTML += '<i style="background: green"></i><span> 5 to 20 </span><br>';
+  div.innerHTML += '<i style="background: yellow"></i><span> 20 to 50 </span><br>';
+  div.innerHTML += '<i style="background: orange"></i><span> 50 to 100 </span><br>';
+  div.innerHTML += '<i style="background: red"></i><span> + 100 </span><br>';
+  
+  return div;
+};
+
+legend.addTo(myMap);
 
 });

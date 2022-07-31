@@ -16,11 +16,17 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(myMap);
 
 // Color
-function chooseColor(country) {                   
-    if (country == "Ukraine") {
-        return "black";
-    } else {
+function chooseColor(depth) {                   
+    if (depth < 5) {
+        return "green";
+    } else if (depth < 20) {
+        return "darkgreen";
+    } else if (depth < 50) {
+        return "yellow";    
+    } else if (depth < 100) {
         return "orange";
+    } else {
+        return "red";
     }
 }
 
@@ -29,15 +35,10 @@ function markerSize(number) {
     if (number==0) {
         number=1
     }
-    return Math.sqrt(number) * 4;
+    return Math.sqrt(number) * 7;
   }
 
 var markers = {
-    //opacity: 0.7,       // onEachFeature
-    //fillOpacity: 0.7,
-    color: "orange",
-    //fillColor: "orange",
-    //radius: 5,
     stroke: true,
     weight: 0.5
 };
@@ -63,19 +64,23 @@ L.geoJSON(data, {
                     fillOpacity:0.5
                 })
             }
-
-            //click: zoomToFeature
             });
+        
+        let magnitude = feature.properties.mag
+        let depth = feature.geometry.coordinates[2];
 
-        // layer.setStyle({
-        //     radius: markerSize(parseInt(feature.properties.fatalities)),
-        //     fillColor: chooseColor(feature.properties.country)
-        // })
+        layer.setStyle({
+            radius: markerSize(parseInt(magnitude)),
+            color: chooseColor(depth), 
+            fillColor: chooseColor(depth)
+        })
 
 
-        layer.bindPopup("<h5> Location: " + feature.properties.place
-            + "</h5> <br> Event Date: " + feature.properties.event_date
-            + "<br>Magnitude: " + feature.properties.mag
+        layer.bindPopup(
+            "<h4> Magnitude: " + magnitude + "</h4>"
+            + "<h4> Depth: " + depth + "</h4>"
+            + "<h5> Location: " + feature.properties.place + "</h5>"
+            
         )
     }
 }).addTo(myMap);

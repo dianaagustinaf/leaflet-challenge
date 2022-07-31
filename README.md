@@ -22,4 +22,5 @@ I have imported and visualised the data:
 
    * I have created a legend that provides context for the map data.
 
-![My Map](static/img/geojson.JPG)
+![My Map](static/img/map1.JPG)
+![My Map](static/img/map2.JPG)
